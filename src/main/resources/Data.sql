@@ -40,7 +40,7 @@ INSERT INTO organization (name, version, full_name, inn, kpp, phone, address, is
 
 INSERT INTO organization (name, version, full_name, inn, kpp, phone, address, is_active) VALUES
 	('ПАО "ОАК"', 0, 'Публичное Акционерное Общество "Объединенная Авиастроительная Корпорация"',
-								 '7708619320', '770505001','84953675545','Город Москва, улица Пионерская, дом 5', true);
+				'7708619320', '770505001','84953675545','Город Москва, улица Пионерская, дом 5', true);
 
 
 INSERT INTO office (organization_id, version, name, phone, address, is_active) VALUES
