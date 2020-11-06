@@ -1,0 +1,1 @@
+package ru.bellintegrator.practice.model;
