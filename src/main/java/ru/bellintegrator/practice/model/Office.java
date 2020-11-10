@@ -6,59 +6,83 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.Version;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 import java.util.List;
 
 /**
- * Объектное представление таблицы Organization
+ * Класс офисов
  */
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
+@NoArgsConstructor
+@EqualsAndHashCode(of = {"name","address"})
+@ToString(of = {"name","address"})
 public class Office {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Служебное поле Hibernate
+     */
     @Version
     private Integer version;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Organization_id")
-    private Organization organization;
-
+    /**
+     * Поле название
+     */
     @Column(nullable = false)
     private String name;
 
+    /**
+     * Поле телефон
+     */
     @Column(length = 11)
     private String phone;
 
+    /**
+     * Поле адрес
+     */
     @Column(nullable = false)
     private String address;
 
+    /**
+     * Поле рабочий ли офис
+     */
     @Column(name = "is_active")
     private Boolean isActive;
 
+    /**
+     * Поле список работников офиса
+     */
     @OneToMany(
-            mappedBy = "Office",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @JoinColumn(
+            name = "office_id",
+            nullable = false
+    )
     private List<Employee> employeeList;
 
+    /**
+     * Конструктор - создание нового объекта <code>Office</code> c определенными значениями
+     * @param name    - инициализирует поле название
+     * @param address - инициализирует поле адрес
+     */
+    public Office(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
 }

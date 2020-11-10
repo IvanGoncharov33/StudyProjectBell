@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.Version;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,30 +16,70 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
+/**
+ * Класс сотрудников
+ */
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
+@NoArgsConstructor
+@EqualsAndHashCode(of = {"firstName", "middleName", "lastName", "position"})
+@ToString(of = {"firstName", "lastName", "position"})
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Служебное поле Hibernate
+     */
     @Version
     private Integer version;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "office_id",
+    /**
+     * Поле имя
+     */
+    @Column(
+            name = "first_name",
             nullable = false
     )
-    private Office office;
+    private String firstName;
 
+    /**
+     * Поле отчество
+     */
+    @Column(name = "middle_name")
+    private String middleName;
+
+    /**
+     * Поле фамилия
+     */
+    @Column(name = "last_name")
+    private String lastName;
+
+    /**
+     * Поле должность
+     */
+    @Column(nullable = false)
+    private String position;
+
+    /**
+     * Поле телефон
+     */
+    @Column(length = 11)
+    private String phone;
+
+    /**
+     * Поле идентифицирован ли сотрудник
+     */
+    private Boolean isIdentified;
+
+    /**
+     * Поле документ удостоверяющий личность
+     */
     @OneToOne(
             mappedBy = "Employee",
             fetch = FetchType.LAZY,
@@ -49,18 +88,21 @@ public class Employee {
     )
     private Document document;
 
-    private String firstName;
-    private String middleName;
-    private String lastName;
-
-    @Column(nullable = false)
-    private String position;
-
+    /**
+     * Поле идентификационный номер страны
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "citizenship_id")
     private Country country;
 
-    private String phone;
-    private Boolean isIdentified;
+    /**
+     * Конструктор - создание нового объекта <code>Employee</code> c определенными значениями
+     * @param firstName - инициализирует поле имя
+     * @param position  - инициализирует поле должность
+     */
+    public Employee(String firstName, String position) {
+        this.firstName = firstName;
+        this.position = position;
+    }
 }
 
