@@ -26,7 +26,6 @@ import javax.persistence.Version;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"firstName", "middleName", "lastName", "position"})
 @ToString(of = {"firstName", "lastName", "position"})
 public class Employee {
     @Id

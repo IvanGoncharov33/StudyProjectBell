@@ -24,7 +24,6 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"inn","kpp"})
 @ToString(of = {"name", "fullName","inn","kpp","address"})
 public class Organization {
 

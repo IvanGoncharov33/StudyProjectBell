@@ -77,22 +77,22 @@ INSERT INTO employee (office_id, version, first_name, second_name, middle_name, 
 		
 
 INSERT INTO document (version, document_number, document_date, document_type_id, employee_id) VALUES
-	 (0, '4411777222', TO_DATE('01-ЯНВ-2015','DD-MON-YYYY'), 10, 1);
+	 (0, '4411777222', '21-10-2008', 10, 1);
 
 INSERT INTO document (version, document_number, document_date, document_type_id, employee_id) VALUES
-	 (0, '4311777222', TO_DATE('05-МАР-2011','DD-MON-YYYY'), 10, 2);
+	 (0, '4311777222', '14-02-2015', 10, 2);
 
 INSERT INTO document (version, document_number, document_date, document_type_id, employee_id) VALUES
-	 (0, '1311555222', TO_DATE('26-ИЮН-2005','DD-MON-YYYY'), 10, 3);
+	 (0, '1311555222', '07-07-2012', 10, 3);
 
 INSERT INTO document (version, document_number, document_date, document_type_id, employee_id) VALUES
-	 (0, '5511777232', TO_DATE('11-СЕН-2018','DD-MON-YYYY'), 10, 4);
+	 (0, '5511777232', '28-01-2019', 10, 4);
 
 INSERT INTO document (version, document_number, document_date, document_type_id, employee_id) VALUES
-	 (0, '4311723222', TO_DATE('15-ОКТ-2001','DD-MON-YYYY'),10, 5);
+	 (0, '4311723222', '05-05-2010',10, 5);
 
 INSERT INTO document (version, document_number, document_date, document_type_id, employee_id) VALUES
-	 (0, '9911345222', TO_DATE('07-АВГ-2009','DD-MON-YYYY'),10, 6);
+	 (0, '9911345222', '14-09-2020',10, 6);
 
 
       

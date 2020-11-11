@@ -20,7 +20,6 @@ import javax.persistence.Table;
 @Setter
 @Getter
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"name", "code"})
 @ToString(of = {"name", "code"})
 @Table(name = "document_type")
 public class DocumentType {

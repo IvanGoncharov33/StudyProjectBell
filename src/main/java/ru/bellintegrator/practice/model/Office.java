@@ -25,7 +25,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"name","address"})
 @ToString(of = {"name","address"})
 public class Office {
 

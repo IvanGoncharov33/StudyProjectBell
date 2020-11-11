@@ -19,7 +19,6 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Setter
 @Getter
-@EqualsAndHashCode(of = {"name", "code"})
 @ToString(of = {"name", "code"})
 public class Country {
 

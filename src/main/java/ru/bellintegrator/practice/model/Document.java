@@ -14,11 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
-
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Version;
-import java.util.Calendar;
+
 
 /**
  * Класс документов удостоверяющих личность
@@ -27,7 +24,6 @@ import java.util.Calendar;
 @Setter
 @Getter
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"documentName", "documentNumber", "documentDate"})
 @ToString(of = {"documentName", "documentNumber", "documentDate"})
 public class Document {
     @Id
@@ -54,9 +50,8 @@ public class Document {
     /**
      * Поле дата выдачи документа
      */
-    @Temporal(TemporalType.DATE)
     @Column(name = "document_date", nullable = false, unique = true)
-    private Calendar documentDate;
+    private String documentDate;
 
     /**
      * Поле сотрудник, которому принадлежит документ
@@ -78,7 +73,7 @@ public class Document {
      * @param documentNumber - инициализирует поле номер документа
      * @param documentDate   - инициализирует поле дата выдачи документа
      */
-    public Document(String documentName, String documentNumber, Calendar documentDate) {
+    public Document(String documentName, String documentNumber, String documentDate) {
         this.documentName = documentName;
         this.documentNumber = documentNumber;
         this.documentDate = documentDate;
