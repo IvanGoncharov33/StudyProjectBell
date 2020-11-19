@@ -80,7 +80,7 @@ public class Employee {
      * Поле документ удостоверяющий личность
      */
     @OneToOne(
-            mappedBy = "Employee",
+            mappedBy = "employee",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             optional = false
