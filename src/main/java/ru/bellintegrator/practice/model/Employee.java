@@ -56,7 +56,7 @@ public class Employee {
     /**
      * Поле фамилия
      */
-    @Column(name = "last_name")
+    @Column(name = "second_name")
     private String lastName;
 
     /**
