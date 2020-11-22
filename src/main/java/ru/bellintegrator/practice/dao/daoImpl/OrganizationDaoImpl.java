@@ -32,11 +32,9 @@ public class OrganizationDaoImpl implements OrganizationDao {
      *{@inheritDoc}
      */
     @Override
-    public List<Organization> findAll(Organization organization) {
+    public List<Organization> getListOfOrganizationsByFilter(Organization organization) {
 
-        if (organization == null){
-            throw new IllegalArgumentException("organization can not be null");
-        }
+
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Organization> criteriaQuery = criteriaBuilder.createQuery(Organization.class);
         Root<Organization> organizationRoot = criteriaQuery.from(Organization.class);
@@ -46,7 +44,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
 
         if(organization.getName() != null){
             predicateList.add(
-                    criteriaBuilder.equal(organizationRoot.get("name"), organization.getName())
+                    criteriaBuilder.like(organizationRoot.get("name"), organization.getName())
             );
         }
 
@@ -56,7 +54,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
             );
         }
 
-        if (organization.getInn() != null){
+       if (organization.getIsActive() != null){
             predicateList.add(
                     criteriaBuilder.equal(organizationRoot.get("isActive"), organization.getIsActive())
             );
@@ -71,7 +69,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
      *{@inheritDoc}
      */
     @Override
-    public Organization findById(Long id) {
+    public Organization getById(Long id) {
        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
        CriteriaQuery<Organization> criteriaQuery = criteriaBuilder.createQuery(Organization.class);
        Root<Organization> organizationRoot = criteriaQuery.from(Organization.class);
@@ -86,19 +84,45 @@ public class OrganizationDaoImpl implements OrganizationDao {
      *{@inheritDoc}
      */
     @Override
-    public long save(Organization organization) {
-        System.out.println(organization.toString());
+    public void save(Organization organization) {
         entityManager.persist(organization);
-        return organization.getId();
     }
 
     /**
      *{@inheritDoc}
      */
     @Override
-    public Long update(Organization organization) {
+    public void  update(Organization organization) {
 
-       Organization organization1 = entityManager.merge(organization);
-       return organization1.getId();
+        Organization updOrganization = getById(organization.getId());
+
+        if (!organization.getName().equals(updOrganization.getName())){
+            updOrganization.setName(organization.getName());
+        }
+
+        if (!organization.getFullName().equals(updOrganization.getFullName())){
+            updOrganization.setFullName(organization.getFullName());
+        }
+
+        if (!organization.getInn().equals(updOrganization.getInn())){
+            updOrganization.setInn(organization.getInn());
+        }
+
+        if (!organization.getKpp().equals(updOrganization.getKpp())){
+            updOrganization.setKpp(organization.getKpp());
+        }
+
+        if (!organization.getAddress().equals(updOrganization.getAddress())){
+            updOrganization.setAddress(organization.getAddress());
+        }
+
+        if (organization.getPhone() != null){
+            updOrganization.setPhone(organization.getPhone());
+        }
+
+        if (organization.getIsActive() != null){
+            updOrganization.setIsActive(organization.getIsActive());
+        }
+        entityManager.merge(updOrganization);
     }
 }

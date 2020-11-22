@@ -29,7 +29,7 @@ public class OrganizationService implements InstanceService<OrganizationFullView
     @Transactional()
     public List<OrganizationShortView > list(OrganizationShortView view) {
         Organization organization = shortViewMapper.toEntity(view);
-        return shortViewMapper.toViewList(organizationDao.findAll(organization));
+        return shortViewMapper.toViewList(organizationDao.getListOfOrganizationsByFilter(organization));
     }
 
     /**
@@ -38,7 +38,7 @@ public class OrganizationService implements InstanceService<OrganizationFullView
     @Override
     @Transactional
     public OrganizationFullView getById(Long id) {
-        Organization organization = organizationDao.findById(id);
+        Organization organization = organizationDao.getById(id);
         return mapper.toView(organization);
     }
 
