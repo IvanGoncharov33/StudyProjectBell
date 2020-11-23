@@ -15,16 +15,12 @@ public interface InstanceService<F , S> {
      * Получить сущность с заданным идентификатором
      * @param id уникальный идентификатор офиса
      * @return сущность
-     * @throws java.util.NoSuchElementException если не существует
-     *         сущности с саданным идентификатором
      */
     F getById(Long id);
 
     /**
      * Обновить сведения о сущности
      * @param view сущность
-     * @throws java.util.NoSuchElementException если не существует
-     *         сущности с саданным идентификатором
      */
     void update(F view);
 
