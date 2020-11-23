@@ -1,7 +1,5 @@
 package ru.bellintegrator.practice.model;
 
-
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,9 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.persistence.Version;
-
 
 /**
  * Класс документов удостоверяющих личность
@@ -62,8 +58,6 @@ public class Document {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "document_type_id")
     private DocumentType documentType;
-
-
 
     /**
      * Конструктор - создание нового объекта <code>Document</code> c определенными значениями
