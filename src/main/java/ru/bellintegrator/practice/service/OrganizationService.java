@@ -6,20 +6,19 @@ import ru.bellintegrator.practice.dao.OrganizationDao;
 import ru.bellintegrator.practice.model.Organization;
 import ru.bellintegrator.practice.model.mapper.Mapper;
 
-import ru.bellintegrator.practice.view.OrganizationFullView;
-import ru.bellintegrator.practice.view.OrganizationShortView;
+import ru.bellintegrator.practice.Dto.OrganizationFullDto;
+import ru.bellintegrator.practice.Dto.OrganizationShortDto;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class OrganizationService implements InstanceService<OrganizationFullView, OrganizationShortView> {
-
+public class OrganizationService implements InstanceService<OrganizationFullDto, OrganizationShortDto> {
 
     private  final OrganizationDao organizationDao;
-    private final Mapper<Organization, OrganizationFullView> mapper;
-    private final Mapper<Organization, OrganizationShortView> shortViewMapper;
+    private final Mapper<Organization, OrganizationFullDto> mapper;
+    private final Mapper<Organization, OrganizationShortDto> shortViewMapper;
 
     /**
      * {@inheritDoc}
@@ -27,7 +26,7 @@ public class OrganizationService implements InstanceService<OrganizationFullView
      */
     @Override
     @Transactional()
-    public List<OrganizationShortView > list(OrganizationShortView view) {
+    public List<OrganizationShortDto> list(OrganizationShortDto view) {
         Organization organization = shortViewMapper.toEntity(view);
         return shortViewMapper.toViewList(organizationDao.getListOfOrganizationsByFilter(organization));
     }
@@ -37,7 +36,7 @@ public class OrganizationService implements InstanceService<OrganizationFullView
      */
     @Override
     @Transactional
-    public OrganizationFullView getById(Long id) {
+    public OrganizationFullDto getById(Long id) {
         Organization organization = organizationDao.getById(id);
         return mapper.toView(organization);
     }
@@ -47,7 +46,7 @@ public class OrganizationService implements InstanceService<OrganizationFullView
      */
     @Override
     @Transactional
-    public void update(OrganizationFullView view) {
+    public void update(OrganizationFullDto view) {
         Organization updatedOrganization = mapper.toEntity(view);
          organizationDao.update(updatedOrganization);
     }
@@ -57,7 +56,7 @@ public class OrganizationService implements InstanceService<OrganizationFullView
      */
     @Override
     @Transactional
-    public void save(OrganizationFullView view) {
+    public void save(OrganizationFullDto view) {
        Organization organizationSaved = mapper.toEntity(view);
        organizationDao.save(organizationSaved);
     }

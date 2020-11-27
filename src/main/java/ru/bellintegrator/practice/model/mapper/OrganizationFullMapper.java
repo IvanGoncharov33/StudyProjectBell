@@ -5,12 +5,12 @@ import ma.glasnost.orika.MapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bellintegrator.practice.model.Organization;
-import ru.bellintegrator.practice.view.OrganizationFullView;
+import ru.bellintegrator.practice.Dto.OrganizationFullDto;
 
 import java.util.List;
 
 @Service
-public class OrganizationFullMapper implements Mapper<Organization, OrganizationFullView> {
+public class OrganizationFullMapper implements Mapper<Organization, OrganizationFullDto> {
 
 
     private final MapperFacade mapperFacade;
@@ -18,30 +18,30 @@ public class OrganizationFullMapper implements Mapper<Organization, Organization
     @Autowired
     public OrganizationFullMapper(MapperFactory mapperFactory){
 
-        mapperFactory.classMap(Organization.class, OrganizationFullView.class)
+        mapperFactory.classMap(Organization.class, OrganizationFullDto.class)
                 .byDefault().register();
 
         mapperFacade = mapperFactory.getMapperFacade();
     }
 
     @Override
-    public Organization toEntity(OrganizationFullView view) {
+    public Organization toEntity(OrganizationFullDto view) {
         return mapperFacade.map(view, Organization.class);
     }
 
     @Override
-    public OrganizationFullView toView(Organization entity) {
-        return mapperFacade.map(entity, OrganizationFullView.class);
+    public OrganizationFullDto toView(Organization entity) {
+        return mapperFacade.map(entity, OrganizationFullDto.class);
     }
 
 
     @Override
-    public List<Organization> toEntityList(Iterable<OrganizationFullView> views) {
+    public List<Organization> toEntityList(Iterable<OrganizationFullDto> views) {
         return mapperFacade.mapAsList(views, Organization.class );
     }
 
     @Override
-    public List<OrganizationFullView> toViewList(Iterable<Organization> entities) {
-        return mapperFacade.mapAsList(entities, OrganizationFullView.class);
+    public List<OrganizationFullDto> toViewList(Iterable<Organization> entities) {
+        return mapperFacade.mapAsList(entities, OrganizationFullDto.class);
     }
 }

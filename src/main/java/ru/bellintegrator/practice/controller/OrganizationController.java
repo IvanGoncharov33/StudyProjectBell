@@ -1,10 +1,6 @@
 package ru.bellintegrator.practice.controller;
 
-
-import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,52 +8,65 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import ru.bellintegrator.practice.response.SuccessResponseBody;
 import ru.bellintegrator.practice.service.OrganizationService;
-import ru.bellintegrator.practice.view.OrganizationFullView;
-import ru.bellintegrator.practice.view.OrganizationShortView;
-import ru.bellintegrator.practice.view.validation.group.ListView;
-import ru.bellintegrator.practice.view.validation.group.SaveView;
-import ru.bellintegrator.practice.view.validation.group.UpdateView;
+import ru.bellintegrator.practice.Dto.OrganizationFullDto;
+import ru.bellintegrator.practice.Dto.OrganizationShortDto;
+import ru.bellintegrator.practice.Dto.validation.group.ListView;
+import ru.bellintegrator.practice.Dto.validation.group.SaveView;
+import ru.bellintegrator.practice.Dto.validation.group.UpdateView;
 
-
-import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Класс-контроллер для организации.
+ */
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/organization")
 public class OrganizationController {
 
-
    private final OrganizationService organizationService;
 
-
+    /**
+     * Получить список организаций по заданным критериям.
+     * @param organizationShortDto - критерии для искомых организаций
+     * @return список искомых организаций
+     */
     @PostMapping("/list")
-    public List<OrganizationShortView>getListOrganization(@Validated(ListView.class) @RequestBody OrganizationShortView organizationView){
+    public List<OrganizationShortDto>getListOrganization(@Validated(ListView.class)
+                                                              @RequestBody OrganizationShortDto organizationShortDto){
 
-        List<OrganizationShortView> organizationShortViewList = organizationService.list(organizationView);
-        return organizationShortViewList;
+        return organizationService.list(organizationShortDto);
     }
 
+    /**
+     * Получить организацию по ee ID.
+     * @param id - идентификатор организации
+     * @return искомая организация.
+     */
     @GetMapping("/{id}")
-    public OrganizationFullView getOrgById(@PathVariable long id) {
+    public OrganizationFullDto getOrgById(@PathVariable long id) {
 
-        OrganizationFullView organizationFullView = organizationService.getById(id);
-        System.out.println(organizationFullView.toString());
-           return organizationFullView ;
+        return organizationService.getById(id);
     }
 
+    /**
+     * Сохранить новую организацию.
+     * @param organizationFullDto - данные сохраняемой организации
+     */
     @PostMapping("/save")
-    public ResponseEntity<?> save(@Validated(SaveView.class) @RequestBody OrganizationFullView organizationView){
-        organizationService.save(organizationView);
-        return ResponseEntity.ok(SuccessResponseBody.SUCCESS_RESPONSE_BODY);
+    public void save(@Validated(SaveView.class) @RequestBody OrganizationFullDto organizationFullDto){
+
+        organizationService.save(organizationFullDto);
     }
 
+    /**
+     * Изменить заданную организацию.
+     * @param organizationFullDto - данные изменяемой организации
+     */
     @PostMapping("/update")
-    public ResponseEntity<?> update(@Validated(UpdateView.class) @RequestBody OrganizationFullView organizationView){
-        organizationService.update(organizationView);
-        return ResponseEntity.ok(SuccessResponseBody.SUCCESS_RESPONSE_BODY);
+    public void update(@Validated(UpdateView.class) @RequestBody OrganizationFullDto organizationFullDto){
+
+        organizationService.update(organizationFullDto);
     }
 }

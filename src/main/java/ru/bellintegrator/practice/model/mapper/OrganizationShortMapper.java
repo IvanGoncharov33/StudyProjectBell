@@ -6,41 +6,41 @@ import ma.glasnost.orika.MapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bellintegrator.practice.model.Organization;
-import ru.bellintegrator.practice.view.OrganizationShortView;
+import ru.bellintegrator.practice.Dto.OrganizationShortDto;
 
 import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class OrganizationShortMapper implements Mapper<Organization, OrganizationShortView> {
+public class OrganizationShortMapper implements Mapper<Organization, OrganizationShortDto> {
 
     private final MapperFacade mapperFacade;
 
     @Autowired
     public OrganizationShortMapper(MapperFactory mapperFactory){
 
-        mapperFactory.classMap(Organization.class, OrganizationShortView.class)
+        mapperFactory.classMap(Organization.class, OrganizationShortDto.class)
                 .byDefault().register();
 
         mapperFacade = mapperFactory.getMapperFacade();
     }
     @Override
-    public Organization toEntity(OrganizationShortView view) {
+    public Organization toEntity(OrganizationShortDto view) {
         return  mapperFacade.map(view, Organization.class);
     }
 
     @Override
-    public OrganizationShortView toView(Organization entity) {
-        return mapperFacade.map(entity, OrganizationShortView.class);
+    public OrganizationShortDto toView(Organization entity) {
+        return mapperFacade.map(entity, OrganizationShortDto.class);
     }
 
     @Override
-    public List<Organization> toEntityList(Iterable<OrganizationShortView> views) {
+    public List<Organization> toEntityList(Iterable<OrganizationShortDto> views) {
         return mapperFacade.mapAsList(views, Organization.class );
     }
 
     @Override
-    public List<OrganizationShortView> toViewList(Iterable<Organization> entities) {
-        return mapperFacade.mapAsList(entities, OrganizationShortView.class );
+    public List<OrganizationShortDto> toViewList(Iterable<Organization> entities) {
+        return mapperFacade.mapAsList(entities, OrganizationShortDto.class );
     }
 }

@@ -1,17 +1,19 @@
 package ru.bellintegrator.practice.dao.daoImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Repository;
 import ru.bellintegrator.practice.dao.OrganizationDao;
 import ru.bellintegrator.practice.model.Organization;
+import ru.bellintegrator.practice.response.NotFoundEntityException;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,12 +23,10 @@ import java.util.List;
 public class OrganizationDaoImpl implements OrganizationDao {
     private final EntityManager entityManager;
 
-
     @Autowired
     public OrganizationDaoImpl(EntityManager entityManager){
         this.entityManager = entityManager;
     }
-
 
     /**
      *{@inheritDoc}
@@ -34,35 +34,39 @@ public class OrganizationDaoImpl implements OrganizationDao {
     @Override
     public List<Organization> getListOfOrganizationsByFilter(Organization organization) {
 
-
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Organization> criteriaQuery = criteriaBuilder.createQuery(Organization.class);
         Root<Organization> organizationRoot = criteriaQuery.from(Organization.class);
         criteriaQuery.select(organizationRoot);
 
-        List<Predicate> predicateList = new ArrayList<>();
+        Predicate criteria = criteriaBuilder.conjunction();
 
         if(organization.getName() != null){
-            predicateList.add(
-                    criteriaBuilder.like(organizationRoot.get("name"), organization.getName())
-            );
+
+        Predicate predicate = criteriaBuilder.equal(organizationRoot.get("name"), organization.getName());
+        criteria = criteriaBuilder.and(criteria, predicate);
         }
 
         if (organization.getInn() != null){
-            predicateList.add(
-                    criteriaBuilder.like(organizationRoot.get("inn"), organization.getInn())
-            );
+
+           Predicate predicate =  criteriaBuilder.like(organizationRoot.get("inn"), organization.getInn());
+           criteria = criteriaBuilder.and(criteria, predicate);
         }
 
        if (organization.getIsActive() != null){
-            predicateList.add(
-                    criteriaBuilder.equal(organizationRoot.get("isActive"), organization.getIsActive())
-            );
-        }
-        criteriaQuery.where(criteriaBuilder.and(predicateList.toArray(new Predicate[0])));
-        TypedQuery<Organization> query = entityManager.createQuery(criteriaQuery);
 
-        return query.getResultList();
+           Predicate predicate = criteriaBuilder.equal(organizationRoot.get("isActive"), organization.getIsActive());
+           criteria = criteriaBuilder.and(criteria, predicate);
+        }
+
+        criteriaQuery.where(criteria);
+        TypedQuery<Organization> query = entityManager.createQuery(criteriaQuery);
+        List<Organization> organizationList = query.getResultList();
+        if (organizationList.size() == 0){
+            throw new NotFoundEntityException("Не найдена организация с заданными критериями");
+        }else{
+            return organizationList;
+        }
     }
 
     /**
@@ -70,13 +74,14 @@ public class OrganizationDaoImpl implements OrganizationDao {
      */
     @Override
     public Organization getById(Long id) {
+
        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
        CriteriaQuery<Organization> criteriaQuery = criteriaBuilder.createQuery(Organization.class);
        Root<Organization> organizationRoot = criteriaQuery.from(Organization.class);
-       criteriaQuery.where(criteriaBuilder.equal(organizationRoot.get("id"), criteriaBuilder.parameter(Long.class, "id")));
+       criteriaQuery.where(criteriaBuilder.equal(organizationRoot.get("id"),
+               criteriaBuilder.parameter(Long.class, "id")));
         TypedQuery<Organization> query = entityManager.createQuery(criteriaQuery);
         query.setParameter("id", id);
-
         return query.getSingleResult();
     }
 
@@ -96,23 +101,23 @@ public class OrganizationDaoImpl implements OrganizationDao {
 
         Organization updOrganization = getById(organization.getId());
 
-        if (!organization.getName().equals(updOrganization.getName())){
+        if (organization.getName() != null){
             updOrganization.setName(organization.getName());
         }
 
-        if (!organization.getFullName().equals(updOrganization.getFullName())){
+        if (organization.getFullName() != null){
             updOrganization.setFullName(organization.getFullName());
         }
 
-        if (!organization.getInn().equals(updOrganization.getInn())){
+        if (organization.getInn() != null){
             updOrganization.setInn(organization.getInn());
         }
 
-        if (!organization.getKpp().equals(updOrganization.getKpp())){
+        if (organization.getKpp()!= null){
             updOrganization.setKpp(organization.getKpp());
         }
 
-        if (!organization.getAddress().equals(updOrganization.getAddress())){
+        if (organization.getAddress()!= null){
             updOrganization.setAddress(organization.getAddress());
         }
 
