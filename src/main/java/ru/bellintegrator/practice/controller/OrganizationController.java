@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.bellintegrator.practice.service.OrganizationService;
-import ru.bellintegrator.practice.Dto.OrganizationFullDto;
-import ru.bellintegrator.practice.Dto.OrganizationShortDto;
-import ru.bellintegrator.practice.Dto.validation.group.ListView;
-import ru.bellintegrator.practice.Dto.validation.group.SaveView;
-import ru.bellintegrator.practice.Dto.validation.group.UpdateView;
+import ru.bellintegrator.practice.dto.OrganizationFullDto;
+import ru.bellintegrator.practice.dto.OrganizationShortDto;
+import ru.bellintegrator.practice.dto.validation.group.ListView;
+import ru.bellintegrator.practice.dto.validation.group.SaveView;
+import ru.bellintegrator.practice.dto.validation.group.UpdateView;
 
 import java.util.List;
 

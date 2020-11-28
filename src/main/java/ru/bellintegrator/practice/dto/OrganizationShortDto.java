@@ -1,4 +1,4 @@
-package ru.bellintegrator.practice.Dto;
+package ru.bellintegrator.practice.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import ru.bellintegrator.practice.Dto.validation.group.ListView;
+import ru.bellintegrator.practice.dto.validation.group.ListView;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

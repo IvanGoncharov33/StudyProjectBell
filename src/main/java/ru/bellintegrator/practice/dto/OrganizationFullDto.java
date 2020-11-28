@@ -1,11 +1,11 @@
-package ru.bellintegrator.practice.Dto;
+package ru.bellintegrator.practice.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import ru.bellintegrator.practice.Dto.validation.group.SaveView;
-import ru.bellintegrator.practice.Dto.validation.group.UpdateView;
+import ru.bellintegrator.practice.dto.validation.group.SaveView;
+import ru.bellintegrator.practice.dto.validation.group.UpdateView;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

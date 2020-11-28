@@ -6,8 +6,8 @@ import ru.bellintegrator.practice.dao.OrganizationDao;
 import ru.bellintegrator.practice.model.Organization;
 import ru.bellintegrator.practice.model.mapper.Mapper;
 
-import ru.bellintegrator.practice.Dto.OrganizationFullDto;
-import ru.bellintegrator.practice.Dto.OrganizationShortDto;
+import ru.bellintegrator.practice.dto.OrganizationFullDto;
+import ru.bellintegrator.practice.dto.OrganizationShortDto;
 
 import javax.transaction.Transactional;
 import java.util.List;

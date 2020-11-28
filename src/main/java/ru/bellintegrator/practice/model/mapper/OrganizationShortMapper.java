@@ -6,7 +6,7 @@ import ma.glasnost.orika.MapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bellintegrator.practice.model.Organization;
-import ru.bellintegrator.practice.Dto.OrganizationShortDto;
+import ru.bellintegrator.practice.dto.OrganizationShortDto;
 
 import java.util.List;
 
