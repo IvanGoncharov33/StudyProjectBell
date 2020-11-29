@@ -13,8 +13,8 @@ INSERT INTO document_type (name, code) VALUES
 INSERT INTO document_type (name, code) VALUES
 ('Паспорт иностранного гражданина', '10');
 INSERT INTO document_type (name, code) VALUES
-('Свидетельство о рассмотрении ходатайства о признании лица      
-беженцем на территории Российской Федерации по существу', '11');
+('Свидетельство о рассмотрении ходатайства о признании лица ' ||
+ 'беженцем на территории Российской Федерации по существу', '11');
 INSERT INTO document_type (name, code) VALUES
 ('Вид на жительство в Российской Федерации ', '12');
 INSERT INTO document_type (name, code) VALUES
@@ -22,13 +22,13 @@ INSERT INTO document_type (name, code) VALUES
 INSERT INTO document_type (name, code) VALUES
 ('Разрешение на временное проживание в Российской Федерации', '15');
 INSERT INTO document_type (name, code) VALUES
-('Свидетельство о предоставлении временного убежища на территории
-Российской Федерации','18');
+('Свидетельство о предоставлении временного убежища на территории ' ||
+ 'Российской Федерации','18');
 INSERT INTO document_type (name, code) VALUES
 ('Паспорт гражданина Российской Федерации','21');
 INSERT INTO document_type (name, code) VALUES                                                  
-('Свидетельство о рождении, выданное уполномоченным органом      
-иностранного государства','23');
+('Свидетельство о рождении, выданное уполномоченным органом ' ||
+ 'иностранного государства','23');
 INSERT INTO document_type (name, code) VALUES
 ('Удостоверение личности военнослужащего Российской Федерации','24');
 INSERT INTO document_type (name, code) VALUES
