@@ -1,14 +1,12 @@
 package ru.bellintegrator.practice.dao.daoImpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.GsonBuilderUtils;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import ru.bellintegrator.practice.dao.OrganizationDao;
 import ru.bellintegrator.practice.model.Organization;
 import ru.bellintegrator.practice.response.NotFoundEntityException;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -20,13 +18,10 @@ import java.util.List;
  *{@inheritDoc}
  */
 @Repository
+@AllArgsConstructor
 public class OrganizationDaoImpl implements OrganizationDao {
-    private final EntityManager entityManager;
 
-    @Autowired
-    public OrganizationDaoImpl(EntityManager entityManager){
-        this.entityManager = entityManager;
-    }
+    private final EntityManager entityManager;
 
     /**
      *{@inheritDoc}
