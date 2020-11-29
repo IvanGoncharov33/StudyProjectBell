@@ -11,6 +11,9 @@ import ru.bellintegrator.practice.dto.validation.group.ListView;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+/**
+ * Сокращенный DTO организации
+ */
 @Getter
 @Setter
 @ToString
