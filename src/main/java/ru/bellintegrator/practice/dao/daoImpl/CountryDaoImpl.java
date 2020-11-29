@@ -22,7 +22,7 @@ public class CountryDaoImpl implements CatalogDao<Country> {
      * {@inheritDoc}
      */
     @Override
-    public List<Country> getAll() {
+    public List<Country> getList() {
 
         Query query = entityManager.createNativeQuery("SELECT * FROM country", Country.class);
         List<Country> countryList = (List<Country>)query.getResultList();

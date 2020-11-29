@@ -20,7 +20,7 @@ public class DocumentTypeService{
     private final CatalogDao<DocumentType> catalogDao;
 
     /**
-     * Пполучение списка всех типов документов
+     * Получение списка всех типов документов
      * @return список DTO для типов документов.
      */
     public List<CatalogDto> getListDocumentType(){

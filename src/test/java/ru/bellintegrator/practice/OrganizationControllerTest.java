@@ -2,7 +2,6 @@ package ru.bellintegrator.practice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -136,12 +135,5 @@ public class OrganizationControllerTest {
         organization.setIsActive(true);
         entityManager.persist(organization);
         return organization;
-    }
-
-    @AfterEach
-    public void afterEach(){
-
-        String sql = "TRUNCATE from organization;";
-        entityManager.createNativeQuery(sql).executeUpdate();
     }
 }
