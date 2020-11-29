@@ -12,5 +12,5 @@ public interface CatalogDao<E> {
      * Получить всю справочную информацию
      * @return список справочной информации
      */
-    List<E> getAll();
+    List<E> getList();
 }

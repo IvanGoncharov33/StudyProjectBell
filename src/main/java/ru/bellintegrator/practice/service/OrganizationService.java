@@ -12,6 +12,9 @@ import ru.bellintegrator.practice.dto.OrganizationShortDto;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ *{@inheritDoc}
+ */
 @Service
 @AllArgsConstructor
 public class OrganizationService implements InstanceService<OrganizationFullDto, OrganizationShortDto> {
@@ -21,7 +24,6 @@ public class OrganizationService implements InstanceService<OrganizationFullDto,
 
     /**
      * {@inheritDoc}
-     * @return
      */
     @Override
     @Transactional()

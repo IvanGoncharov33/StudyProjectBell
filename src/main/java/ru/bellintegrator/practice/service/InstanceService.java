@@ -2,31 +2,36 @@ package ru.bellintegrator.practice.service;
 
 import java.util.List;
 
+/**
+ * Интерфейс сервисного уровня приложения
+ * @param <F> - DTO сущность
+ * @param <S> - DTO - фильтр для сущностей
+ */
 public interface InstanceService<F , S> {
 
     /**
-     * Получить список сущностей по заданным критериям
-     * @param view - критерии сущностей
-     * @return список сущностей
+     * Получить список сущностей по фильтру
+     * @param dto - фильтр сущностей
+     * @return список DTO сущностей
      */
-    List<S> list(S view);
+    List<S> list(S dto);
 
     /**
      * Получить сущность с заданным идентификатором
-     * @param id уникальный идентификатор офиса
-     * @return сущность
+     * @param id уникальный идентификатор сущности
+     * @return DTO c заданным идентификатором
      */
     F getById(Long id);
 
     /**
      * Обновить сведения о сущности
-     * @param view сущность
+     * @param dto DTO с данными для изменения
      */
-    void update(F view);
+    void update(F dto);
 
     /**
      * Добавить новую сущность
-     * @param view сущность
+     * @param dto DTO для сохранения
      */
-    void save(F view);
+    void save(F dto);
 }

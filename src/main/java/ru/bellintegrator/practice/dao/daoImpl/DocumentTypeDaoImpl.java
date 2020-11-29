@@ -22,7 +22,7 @@ public class DocumentTypeDaoImpl implements CatalogDao<DocumentType> {
      * {@inheritDoc}
      */
     @Override
-    public List<DocumentType> getAll() {
+    public List<DocumentType> getList() {
 
         Query query = entityManager.createQuery("select d from DocumentType d", DocumentType.class);
         List<DocumentType> documentTypeList =   (List<DocumentType>) query.getResultList();
