@@ -1,7 +1,6 @@
 package ru.bellintegrator.practice.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.bellintegrator.practice.dao.CatalogDao;
 import ru.bellintegrator.practice.dto.CatalogDto;

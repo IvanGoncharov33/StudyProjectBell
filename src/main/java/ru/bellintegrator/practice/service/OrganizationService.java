@@ -1,14 +1,12 @@
 package ru.bellintegrator.practice.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.bellintegrator.practice.dao.OrganizationDao;
-import ru.bellintegrator.practice.model.Organization;
-import ru.bellintegrator.practice.model.mapper.DefaultMapper;
-
 import ru.bellintegrator.practice.dto.OrganizationFullDto;
 import ru.bellintegrator.practice.dto.OrganizationShortDto;
+import ru.bellintegrator.practice.model.Organization;
+import ru.bellintegrator.practice.model.mapper.DefaultMapper;
 
 import javax.transaction.Transactional;
 import java.util.List;

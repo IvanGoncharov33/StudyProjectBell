@@ -1,13 +1,11 @@
 package ru.bellintegrator.practice.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.bellintegrator.practice.dao.EmployeeDao;
 import ru.bellintegrator.practice.dto.EmployeeDto;
 import ru.bellintegrator.practice.model.Employee;
 import ru.bellintegrator.practice.model.mapper.DefaultMapper;
-import ru.bellintegrator.practice.model.mapper.EmployeeMapperImpl;
 
 import javax.transaction.Transactional;
 import java.util.List;
