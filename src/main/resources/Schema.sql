@@ -46,9 +46,9 @@ COMMENT ON TABLE employee IS 'Сотрудники офисов';
 CREATE TABLE IF NOT EXISTS Document(
 employee_id       INTEGER       NOT NULL      COMMENT 'Уникальный идентификатор работника' ,
 version           INTEGER       NOT NULL      COMMENT 'Служебное поле Hibernate',
-document_number   VARCHAR(255)  NOT NULL      COMMENT 'Номер документа',
-document_date     VARCHAR(255)  NOT NULL      COMMENT 'Дата выдачи документа',
-document_type_id  INTEGER       NOT NULL      COMMENT 'Идентификатор вида документа',
+document_number   VARCHAR(255)                COMMENT 'Номер документа',
+document_date     VARCHAR(255)                COMMENT 'Дата выдачи документа',
+document_type_id  INTEGER                     COMMENT 'Идентификатор вида документа',
 CONSTRAINT doc_id_pk PRIMARY KEY  (employee_id)
 );
 COMMENT ON TABLE document IS 'Документы удостоверяющие личность физического лица';
