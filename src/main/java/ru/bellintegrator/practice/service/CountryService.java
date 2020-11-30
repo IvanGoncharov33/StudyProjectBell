@@ -1,6 +1,7 @@
 package ru.bellintegrator.practice.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.bellintegrator.practice.dao.CatalogDao;
 import ru.bellintegrator.practice.dto.CatalogDto;
@@ -16,8 +17,7 @@ import java.util.List;
 @Service
 public class CountryService{
 
-    private final DefaultMapper defaultMapper;
-
+    private final DefaultMapper defaultMapperImpl;
     private final CatalogDao<Country> countryCatalogDao;
 
     /**
@@ -26,6 +26,6 @@ public class CountryService{
      */
     public List<CatalogDto> getList(){
 
-      return defaultMapper.mapAsList(countryCatalogDao.getList(), CatalogDto.class);
+      return defaultMapperImpl.mapAsList(countryCatalogDao.getList(), CatalogDto.class);
     }
 }

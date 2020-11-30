@@ -1,6 +1,7 @@
 package ru.bellintegrator.practice.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.bellintegrator.practice.dao.CatalogDao;
 import ru.bellintegrator.practice.dto.CatalogDto;
@@ -16,7 +17,7 @@ import java.util.List;
 @Service
 public class DocumentTypeService{
 
-    private final DefaultMapper mapper;
+    private final DefaultMapper defaultMapperImpl;
     private final CatalogDao<DocumentType> catalogDao;
 
     /**
@@ -25,6 +26,6 @@ public class DocumentTypeService{
      */
     public List<CatalogDto> getListDocumentType(){
 
-       return mapper.mapAsList(catalogDao.getList(), CatalogDto.class);
+       return defaultMapperImpl.mapAsList(catalogDao.getList(), CatalogDto.class);
     }
 }
