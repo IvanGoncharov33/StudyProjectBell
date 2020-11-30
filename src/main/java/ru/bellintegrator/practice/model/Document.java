@@ -36,13 +36,13 @@ public class Document {
     /**
      * Поле номер документа
      */
-    @Column(name = "document_number", nullable = false, unique = true)
+    @Column(name = "document_number", unique = true)
     private String documentNumber;
 
     /**
      * Поле дата выдачи документа
      */
-    @Column(name = "document_date", nullable = false, unique = true)
+    @Column(name = "document_date", unique = true)
     private String documentDate;
 
     /**
@@ -55,7 +55,7 @@ public class Document {
     /**
      * Поле идентификационный номер типа документа
      */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "document_type_id")
     private DocumentType documentType;
 
@@ -63,9 +63,11 @@ public class Document {
      * Конструктор - создание нового объекта <code>Document</code> c определенными значениями
      * @param documentNumber - инициализирует поле номер документа
      * @param documentDate   - инициализирует поле дата выдачи документа
+     * @param employee - инициализирует поле сотрудник
      */
-    public Document( String documentNumber, String documentDate) {
+    public Document( String documentNumber, String documentDate, Employee employee) {
         this.documentNumber = documentNumber;
         this.documentDate = documentDate;
+        this.employee = employee;
     }
 }

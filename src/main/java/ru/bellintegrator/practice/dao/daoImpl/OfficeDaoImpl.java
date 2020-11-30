@@ -89,7 +89,8 @@ public class OfficeDaoImpl implements OfficeDao {
     @Override
     public void save(Office office, OfficeDto officeDto) {
 
-        TypedQuery<Organization> typedQuery = entityManager.createQuery("select org from Organization org where org.id like :id", Organization.class)
+        TypedQuery<Organization> typedQuery = entityManager.createQuery("select org from Organization org" +
+                " where org.id like :id", Organization.class)
                 .setParameter("id", officeDto.getOrganizationId());
         Organization organization = typedQuery.getSingleResult();
         organization.getOfficeList().add(office);
@@ -119,7 +120,6 @@ public class OfficeDaoImpl implements OfficeDao {
         if(office.getPhone() != null){
             updatedOffice.setIsActive(office.getIsActive());
         }
-
         entityManager.merge(updatedOffice);
     }
 }

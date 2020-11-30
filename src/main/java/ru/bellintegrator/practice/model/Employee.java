@@ -96,10 +96,13 @@ public class Employee {
      * Конструктор - создание нового объекта <code>Employee</code> c определенными значениями
      * @param firstName - инициализирует поле имя
      * @param position  - инициализирует поле должность
+     * @param document - инициализирует поле документ
      */
-    public Employee(String firstName, String position) {
+    public Employee(String firstName, String position, Document document) {
         this.firstName = firstName;
         this.position = position;
+        document.setEmployee(this);
+        this.document = document;
     }
 }
 

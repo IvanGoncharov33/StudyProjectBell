@@ -47,7 +47,7 @@ public class EmployeeService implements InstanceService<EmployeeDto, EmployeeDto
     @Override
     public void update(EmployeeDto dto) {
       Employee employee =  employeeMapperImpl.map(dto, Employee.class);
-      employeeDao.update(employee);
+      employeeDao.update(employee, dto);
     }
 
     /**
@@ -57,6 +57,6 @@ public class EmployeeService implements InstanceService<EmployeeDto, EmployeeDto
     @Override
     public void save(EmployeeDto dto) {
     Employee employee = employeeMapperImpl.map(dto, Employee.class);
-    employeeDao.save(employee);
+    employeeDao.save(employee, dto);
     }
 }
