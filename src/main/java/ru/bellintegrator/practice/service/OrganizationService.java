@@ -27,7 +27,7 @@ public class OrganizationService implements InstanceService<OrganizationFullDto,
      */
     @Override
     @Transactional()
-    public List<OrganizationShortDto> list(OrganizationShortDto view) {
+    public List<OrganizationShortDto> getList(OrganizationShortDto view) {
 
         Organization organization = defaultMapper.map(view, Organization.class);
         return defaultMapper.mapAsList(organizationDao.getListOfOrganizationsByFilter(organization), OrganizationShortDto.class);

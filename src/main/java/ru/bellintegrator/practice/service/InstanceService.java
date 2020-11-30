@@ -14,7 +14,7 @@ public interface InstanceService<F , S> {
      * @param dto - фильтр сущностей
      * @return список DTO сущностей
      */
-    List<S> list(S dto);
+    List<S> getList(S dto);
 
     /**
      * Получить сущность с заданным идентификатором

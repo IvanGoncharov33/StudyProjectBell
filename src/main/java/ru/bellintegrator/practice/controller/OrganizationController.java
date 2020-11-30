@@ -36,7 +36,7 @@ public class OrganizationController {
     public List<OrganizationShortDto>getListOrganization(@Validated(ListView.class)
                                                               @RequestBody OrganizationShortDto organizationShortDto){
 
-        return organizationService.list(organizationShortDto);
+        return organizationService.getList(organizationShortDto);
     }
 
     /**
