@@ -55,7 +55,10 @@ public class EmployeeDto {
     private String documentDate;
 
     @JsonView({FullView.class})
-    private String citizenshipName;
+    private String documentCode;
+
+    @JsonView({FullView.class})
+    private String citizenShipName;
 
     @JsonView({FullView.class})
     private String citizenShipCode;
