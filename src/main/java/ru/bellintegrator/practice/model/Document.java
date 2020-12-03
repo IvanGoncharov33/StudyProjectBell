@@ -63,11 +63,9 @@ public class Document {
      * Конструктор - создание нового объекта <code>Document</code> c определенными значениями
      * @param documentNumber - инициализирует поле номер документа
      * @param documentDate   - инициализирует поле дата выдачи документа
-     * @param employee - инициализирует поле сотрудник
      */
-    public Document( String documentNumber, String documentDate, Employee employee) {
+    public Document( String documentNumber, String documentDate) {
         this.documentNumber = documentNumber;
         this.documentDate = documentDate;
-        this.employee = employee;
     }
 }

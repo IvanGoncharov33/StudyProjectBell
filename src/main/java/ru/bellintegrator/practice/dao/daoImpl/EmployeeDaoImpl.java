@@ -33,6 +33,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
      */
     @Override
     public List<Employee> getListEmployees(EmployeeDto employeeFilter) {
+
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
         Root<Office> officeRoot = criteriaQuery.from(Office.class);
@@ -106,7 +107,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 criteriaBuilder.parameter(Long.class, "id")));
         TypedQuery<Employee> typedQuery = entityManager.createQuery(criteriaQuery);
         typedQuery.setParameter("id", id);
-
         return typedQuery.getSingleResult();
     }
 
@@ -117,38 +117,33 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public void save(Employee employee, EmployeeDto employeeDto){
 
         Office office = getOfficeById(employeeDto);
-
         if (employee.getDocument() != null){
-
             employee.getDocument().setEmployee(employee);
-
-            if (employee.getDocument().getDocumentType().getCode() != null){
-                employee.getDocument().setDocumentType(getDocumentTypeByCode(employeeDto));
-            }else if (employee.getDocument().getDocumentType().getName() != null){
-                employee.getDocument().setDocumentType(getDocumentTypeByName(employeeDto));
+            if (employee.getDocument().getDocumentType() != null) {
+                if (employee.getDocument().getDocumentType().getCode() != null){
+                    employee.getDocument().setDocumentType(getDocumentTypeByCode(employeeDto));
+                } else if (employee.getDocument().getDocumentType().getName() != null) {
+                    employee.getDocument().setDocumentType(getDocumentTypeByName(employeeDto));
+                }
             }
         }
 
-        if (employee.getCountry().getCode() != null){
+        if (employee.getCountry() != null){
             employee.setCountry(getCountryByCode(employeeDto));
-        }else if (employee.getCountry().getName() != null){
-            employee.setCountry(getCountryByName(employeeDto));
         }
         office.getEmployeeList().add(employee);
-        entityManager.merge(office);
     }
 
     /**
      *{@inheritDoc}
      */
     @Override
-    public void update(Employee employee, EmployeeDto employeeDto) { //TODO исправить работу
+    public void update(Employee employee, EmployeeDto employeeDto) {
 
         Employee updateEmployee = getById(employee.getId());
 
-        if (employeeDto.getOfficeId() != null){
-            Office office = getOfficeById(employeeDto);
-            office.getEmployeeList().add(updateEmployee);
+       if (employeeDto.getOfficeId() != null){
+            getOfficeById(employeeDto).getEmployeeList().add(updateEmployee);
         }
 
         if (employee.getFirstName() != null){
@@ -168,38 +163,37 @@ public class EmployeeDaoImpl implements EmployeeDao {
         }
 
         if (employee.getPhone() != null){
-            updateEmployee.setPosition(employee.getPhone());
+            updateEmployee.setPhone(employee.getPhone());
         }
 
         if (employee.getDocument() != null){
 
-            updateEmployee.getDocument().setEmployee(employee);//TODO проверка других полей документа
+            if (updateEmployee.getDocument() != null){
 
-            if (employee.getDocument().getDocumentType().getCode() != null){
-                updateEmployee.getDocument().setDocumentType(getDocumentTypeByCode(employeeDto));
-            }else if (employee.getDocument().getDocumentType().getName() != null){
+                if (employee.getDocument().getDocumentNumber() != null){
+                    updateEmployee.getDocument().setDocumentNumber(employee.getDocument().getDocumentNumber());
+                }
+
+                if (employee.getDocument().getDocumentDate() !=null){
+                    updateEmployee.getDocument().setDocumentDate(employee.getDocument().getDocumentDate());
+                }
+            }else {
+                employee.getDocument().setEmployee(updateEmployee);
+                 updateEmployee.setDocument(employee.getDocument());
+            }
+
+            if (employee.getDocument().getDocumentType() != null & employee.getDocument().getDocumentType().getName() != null ){
                 updateEmployee.getDocument().setDocumentType(getDocumentTypeByName(employeeDto));
             }
         }
 
-        /*if (employee.getDocument().getDocumentNumber() != null){
-            updateEmployee.getDocument().setDocumentNumber(employee.getDocument().getDocumentNumber());
-        }
-
-        if (employee.getDocument().getDocumentDate() !=null){
-            updateEmployee.getDocument().setDocumentDate(employee.getDocument().getDocumentDate());
-        }*/
-
-        if (employee.getCountry().getCode() != null){
+        if (employee.getCountry() != null){
             updateEmployee.setCountry(getCountryByCode(employeeDto));
         }
 
         if (employee.getIsIdentified() != null){
             updateEmployee.setIsIdentified(employee.getIsIdentified());
         }
-
-        entityManager.merge(updateEmployee);
-
     }
 
     private Office getOfficeById(EmployeeDto employeeDto){
@@ -227,15 +221,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     private Country getCountryByCode(EmployeeDto employeeDto){
-        TypedQuery<Country> countryTypedQuery = entityManager.createQuery("select  coun from Country  coun " +
-                "where coun.code like  :code", Country.class).setParameter("code", employeeDto.getCitizenShipCode());
-        return  countryTypedQuery.getSingleResult();
-    }
-    
-    private Country getCountryByName(EmployeeDto employeeDto){
-        TypedQuery<Country> countryTypedQuery = entityManager.createQuery("select  coun from Country  coun " +
-                "where coun.name like  :name", Country.class).setParameter("name", employeeDto.getCitizenShipName());
-        return  countryTypedQuery.getSingleResult();
-    }
 
+        TypedQuery<Country> countryTypedQuery = entityManager.createQuery("select  coun from Country  coun " +
+                "where coun.code like  :code", Country.class)
+                .setParameter("code", employeeDto.getCitizenShipCode());
+        return  countryTypedQuery.getSingleResult();
+    }
 }

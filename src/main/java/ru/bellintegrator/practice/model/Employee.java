@@ -88,7 +88,7 @@ public class Employee {
     /**
      * Поле идентификационный номер страны
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "citizenship_id")
     private Country country;
 
@@ -96,13 +96,10 @@ public class Employee {
      * Конструктор - создание нового объекта <code>Employee</code> c определенными значениями
      * @param firstName - инициализирует поле имя
      * @param position  - инициализирует поле должность
-     * @param document - инициализирует поле документ
      */
-    public Employee(String firstName, String position, Document document) {
+    public Employee(String firstName, String position) {
         this.firstName = firstName;
         this.position = position;
-        document.setEmployee(this);
-        this.document = document;
     }
 }
 
