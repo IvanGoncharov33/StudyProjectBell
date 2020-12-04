@@ -57,14 +57,10 @@ public class OrganizationControllerTest {
     @Test
     public void shouldGetByIdOrganization() throws Exception {
 
-        OrganizationShortDto organizationShortDto = new OrganizationShortDto();
-        organizationShortDto.setId(1L);
-
-        this.mockMvc.perform(get("/api/organization/{id}", organizationShortDto.getId())
-                .content(objectMapper.writeValueAsString(organizationShortDto.getId()))
+        this.mockMvc.perform(get("/api/organization/{id}", 1)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.id").value(organizationShortDto.getId()));
+                .andExpect(jsonPath("$.data.id").value(1));
     }
 
     @Test

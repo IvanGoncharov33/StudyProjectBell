@@ -54,12 +54,10 @@ public class OfficeControllerTest{
     @Test
     public void shouldGetByIdOffice() throws Exception {
 
-        OfficeDto officeDto = new OfficeDto();
-        officeDto.setId(1L);
-        this.mockMvc.perform(get("/api/office/{id}", officeDto.getId())
+        this.mockMvc.perform(get("/api/office/{id}", 1)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.id").value(officeDto.getId()));
+                .andExpect(jsonPath("$.data.id").value(1));
     }
 
     @Test
