@@ -9,11 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.bellintegrator.practice.dao.OrganizationDao;
+import ru.bellintegrator.practice.dto.OrganizationFullDto;
 import ru.bellintegrator.practice.dto.OrganizationShortDto;
-import ru.bellintegrator.practice.model.Organization;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import static org.hamcrest.Matchers.notNullValue;
@@ -34,106 +32,94 @@ public class OrganizationControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
-    @Autowired
-    OrganizationDao organizationDao;
 
-    @Autowired
-    EntityManager entityManager;
 
     @Test
     public void shouldKeepOrganization() throws Exception{
 
-        Organization organization = new Organization("AО Сэйв", "Акционерное общество Сэйв",
-                "1111111111", "111111111", "г.Москва ул. Свободы д.1");
         this.mockMvc.perform(post("/api/organization/save")
-                .content(objectMapper.writeValueAsString(organization))
+                .content(objectMapper.writeValueAsString(createOrganizationSaveData()))
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result").value("success"));
     }
 
     @Test
     public void shouldUpdateOrganization() throws Exception{
 
-        Organization updatedOrganization = createTestOrganization();
-        updatedOrganization.setName("АО Апдэйт");
-        updatedOrganization.setFullName("Акционерное общество Апдэйт");
-        updatedOrganization.setInn("0001112223");
-        updatedOrganization.setKpp("999888777");
-
         this.mockMvc.perform(post("/api/organization/update")
-                .content(objectMapper.writeValueAsString(updatedOrganization))
-                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+                .content(objectMapper.writeValueAsString(createOrganizationUpdateData()))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result").value("success"));
     }
 
     @Test
     public void shouldGetByIdOrganization() throws Exception {
 
-        Organization organization = createTestOrganization();
-        Long id = organization.getId();
-        this.mockMvc.perform(get("/api/organization/{id}", id)
-                .content(objectMapper.writeValueAsString(organization))
+        OrganizationShortDto organizationShortDto = new OrganizationShortDto();
+        organizationShortDto.setId(1L);
+
+        this.mockMvc.perform(get("/api/organization/{id}", organizationShortDto.getId())
+                .content(objectMapper.writeValueAsString(organizationShortDto.getId()))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.id").value(id));
+                .andExpect(jsonPath("$.data.id").value(organizationShortDto.getId()));
     }
 
     @Test
-    public void shouldGetListOrganizationsWithNameFilter() throws Exception{
+    public void shouldGetListOrganizationsWithRequiredFieldsFilter() throws Exception{
 
-        Organization organization = createTestOrganization();
-        OrganizationShortDto organizationShortDto = new OrganizationShortDto();
-        organizationShortDto.setName(organization.getName());
+        OrganizationShortDto organizationFilter = new OrganizationShortDto();
+        organizationFilter.setName("АО \"Вертолеты России\"");
 
         this.mockMvc.perform(post("/api/organization/list")
-                .content(objectMapper.writeValueAsString(organizationShortDto))
+                .content(objectMapper.writeValueAsString(organizationFilter))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data", notNullValue()))
-                .andExpect(jsonPath("$.data[0].name").value(organizationShortDto.getName()));
+                .andExpect(jsonPath("$.data[*].name").value(organizationFilter.getName()));
     }
 
     @Test
-    public void shouldGetListOrganizationsWithNameAndInnFilter() throws Exception{
+    public void shouldGetListOrganizationsWithAllFilter() throws Exception{
 
-        Organization organization = createTestOrganization();
-        OrganizationShortDto organizationShortDto = new OrganizationShortDto();
-        organizationShortDto.setName(organization.getName());
-        organizationShortDto.setInn(organization.getInn());
+        OrganizationShortDto organizationFilter = new OrganizationShortDto();
+        organizationFilter.setName("АО \"Вертолеты России\"");
+        organizationFilter.setInn("7731559044");
+        organizationFilter.setIsActive(true);
 
         this.mockMvc.perform(post("/api/organization/list")
-                .content(objectMapper.writeValueAsString(organizationShortDto))
+                .content(objectMapper.writeValueAsString(organizationFilter))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data", notNullValue()))
-                .andExpect(jsonPath("$.data[0].name").value(organizationShortDto.getName()))
-                .andExpect(jsonPath("$.data[0].inn").value(organizationShortDto.getInn()));
+                .andExpect(jsonPath("$.data[*].name").value(organizationFilter.getName()))
+                .andExpect(jsonPath("$.data[*].isActive").value(organizationFilter.getIsActive()));
     }
 
-    @Test
-    public void shouldGetListOrganizationsWithNameAndInnAndIsActiveFilter() throws Exception{
+    private OrganizationFullDto createOrganizationSaveData(){
 
-        Organization organization = createTestOrganization();
-        OrganizationShortDto organizationShortDto = new OrganizationShortDto();
-        organizationShortDto.setName(organization.getName());
-        organizationShortDto.setInn(organization.getInn());
-        organizationShortDto.setIsActive(organization.getIsActive());
-
-        this.mockMvc.perform(post("/api/organization/list")
-                .content(objectMapper.writeValueAsString(organizationShortDto))
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data", notNullValue()))
-                .andExpect(jsonPath("$.data[0].name").value(organizationShortDto.getName()))
-                .andExpect(jsonPath("$.data[0].inn").value(organizationShortDto.getInn()))
-                .andExpect(jsonPath("$.data[0].isActive").value(organizationShortDto.getIsActive()));
+        OrganizationFullDto organizationTest = new OrganizationFullDto();
+        organizationTest.setName("AО Сэйв");
+        organizationTest.setFullName("Акционерное общество Сэйв");
+        organizationTest.setInn("1111111111");
+        organizationTest.setKpp("111111111");
+        organizationTest.setAddress("г.Москва ул. Свободы д.1");
+        organizationTest.setPhone("89995553322");
+        organizationTest.setIsActive(false);
+        return organizationTest;
     }
 
-    public Organization createTestOrganization(){
+    private OrganizationFullDto createOrganizationUpdateData(){
 
-        Organization organization = new  Organization("АО Хлеб", "Акционерное общество Хлеб",
-                "0123456789","123456789", "г.Москва, ул. Лубянка, д.1");
-        organization.setIsActive(true);
-        entityManager.persist(organization);
-        return organization;
+        OrganizationFullDto organizationFullDto = new OrganizationFullDto();
+        organizationFullDto.setId(1L);
+        organizationFullDto.setName("АО Апдэйт");
+        organizationFullDto.setFullName("Акционерное общество Апдэйт");
+        organizationFullDto.setInn("0001112223");
+        organizationFullDto.setKpp("999888777");
+        organizationFullDto.setAddress("г. Апдейт");
+        return organizationFullDto;
     }
 }
