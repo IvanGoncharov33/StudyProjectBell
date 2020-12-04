@@ -32,8 +32,6 @@ public class OrganizationControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
-
-
     @Test
     public void shouldKeepOrganization() throws Exception{
 

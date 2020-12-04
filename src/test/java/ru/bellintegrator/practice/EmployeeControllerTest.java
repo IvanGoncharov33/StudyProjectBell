@@ -19,7 +19,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
@@ -100,7 +99,6 @@ public class EmployeeControllerTest {
         employeeDto.setDocumentCode("21");
         employeeDto.setCitizenShipCode("643");
         return employeeDto;
-
     }
 
     private EmployeeDto createEmployeeUpdateData() {
