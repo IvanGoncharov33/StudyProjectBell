@@ -10,7 +10,8 @@ import ru.bellintegrator.practice.model.mapper.DefaultMapper;
 import java.util.List;
 
 /**
- * Класс сервисного слоя приложения для справочника "Страны"
+ * Класс сервисного слоя приложения
+ * для справочника "Страны"
  */
 @AllArgsConstructor
 @Service

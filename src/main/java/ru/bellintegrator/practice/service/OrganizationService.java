@@ -12,30 +12,35 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- *{@inheritDoc}
+ * Класс сервисного слоя приложения,
+ * для Organization
  */
 @Service
 @AllArgsConstructor
-public class OrganizationService implements InstanceService<OrganizationFullDto, OrganizationShortDto> {
+public class OrganizationService{
 
-    private  final OrganizationDao organizationDao;
+    private final OrganizationDao organizationDao;
     private final DefaultMapper defaultMapperImpl;
 
     /**
-     * {@inheritDoc}
+     * Получение списка организаций
+     * с применением фильтра
+     * @param dto - фильтр для организаций
+     * @return отфильтрованный список DTO организаций
      */
-    @Override
     @Transactional
-    public List<OrganizationShortDto> getList(OrganizationShortDto view) {
+    public List<OrganizationShortDto> getList(OrganizationShortDto dto) {
 
-        Organization organization = defaultMapperImpl.map(view, Organization.class);
-        return defaultMapperImpl.mapAsList(organizationDao.getListOfOrganizationsByFilter(organization), OrganizationShortDto.class);
+        Organization organization = defaultMapperImpl.map(dto, Organization.class);
+        return defaultMapperImpl.mapAsList(organizationDao
+                .getListOfOrganizationsByFilter(organization), OrganizationShortDto.class);
     }
 
     /**
-     * {@inheritDoc}
+     * Получение организации с заданным идентификатором
+     * @param id - идентификатор организации
+     * @return DTO организации с заданным идентификатором
      */
-    @Override
     @Transactional
     public OrganizationFullDto getById(Long id) {
 
@@ -44,24 +49,24 @@ public class OrganizationService implements InstanceService<OrganizationFullDto,
     }
 
     /**
-     * {@inheritDoc}
+     * Изменение данных действующей организации
+     * @param dto - изменяемые данные организации
      */
-    @Override
     @Transactional
-    public void update(OrganizationFullDto view) {
+    public void update(OrganizationFullDto dto) {
 
-        Organization updatedOrganization = defaultMapperImpl.map(view, Organization.class);
+        Organization updatedOrganization = defaultMapperImpl.map(dto, Organization.class);
         organizationDao.update(updatedOrganization);
     }
 
     /**
-     * {@inheritDoc}
+     * Добавление новой организации
+     * @param dto - данные новой организации
      */
-    @Override
     @Transactional
-    public void save(OrganizationFullDto view) {
+    public void save(OrganizationFullDto dto) {
 
-        Organization organizationSaved = defaultMapperImpl.map(view, Organization.class);
+        Organization organizationSaved = defaultMapperImpl.map(dto, Organization.class);
        organizationDao.save(organizationSaved);
     }
 }

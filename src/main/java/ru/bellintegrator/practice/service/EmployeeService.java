@@ -11,50 +11,55 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- *{@inheritDoc}
+ * Класс сервисного слоя приложения,
+ * для Employee
  */
 @AllArgsConstructor
 @Service
-public class EmployeeService implements InstanceService<EmployeeDto, EmployeeDto> {
+public class EmployeeService{
 
     private final EmployeeDao employeeDao;
     private final DefaultMapper employeeMapperImpl;
 
     /**
-     *{@inheritDoc}
+     * Получение списка сотрудников
+     * с применением фильтра
+     * @param dto - фильтр
+     * @return отфильтрованный список DTO сотрудников
      */
     @Transactional
-    @Override
     public List<EmployeeDto> getList(EmployeeDto dto) {
 
         return employeeMapperImpl.mapAsList(employeeDao.getListEmployees(dto), EmployeeDto.class);
     }
 
     /**
-     *{@inheritDoc}
+     * Получение сотрудника с заданным идентификатором
+     * @param id - идентификатор сотрудника
+     * @return DTO сотрудника с заданным идентификатором
      */
     @Transactional
-    @Override
     public EmployeeDto getById(Long id) {
 
         return employeeMapperImpl.map(employeeDao.getById(id), EmployeeDto.class);
     }
 
     /**
-     *{@inheritDoc}
+     * Изменение данных
+     * действующего сотрудника
+     * @param dto - измененные данные сотрудника
      */
     @Transactional
-    @Override
     public void update(EmployeeDto dto) {
       Employee employee =  employeeMapperImpl.map(dto, Employee.class);
       employeeDao.update(employee, dto);
     }
 
     /**
-     *{@inheritDoc}
+     * Добавление нового сотрудника
+     * @param dto - данные нового сотрудника
      */
     @Transactional
-    @Override
     public void save(EmployeeDto dto) {
     Employee employee = employeeMapperImpl.map(dto, Employee.class);
     employeeDao.save(employee, dto);

@@ -25,8 +25,6 @@ public class DocumentTypeDaoImpl implements CatalogDao<DocumentType> {
     public List<DocumentType> getList() {
 
         Query query = entityManager.createQuery("select d from DocumentType d", DocumentType.class);
-        List<DocumentType> documentTypeList =   (List<DocumentType>) query.getResultList();
-
-        return documentTypeList;
+        return (List<DocumentType>) query.getResultList();
     }
 }

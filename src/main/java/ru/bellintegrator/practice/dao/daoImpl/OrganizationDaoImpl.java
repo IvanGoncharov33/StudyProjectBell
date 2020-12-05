@@ -123,6 +123,5 @@ public class OrganizationDaoImpl implements OrganizationDao {
         if (organization.getIsActive() != null){
             updOrganization.setIsActive(organization.getIsActive());
         }
-        entityManager.merge(updOrganization);
     }
 }

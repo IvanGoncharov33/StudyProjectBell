@@ -120,6 +120,5 @@ public class OfficeDaoImpl implements OfficeDao {
         if(office.getPhone() != null){
             updatedOffice.setIsActive(office.getIsActive());
         }
-        entityManager.merge(updatedOffice);
     }
 }

@@ -10,7 +10,8 @@ import ru.bellintegrator.practice.model.mapper.DefaultMapper;
 import java.util.List;
 
 /**
- *Класс сервисного уровня приложения для справочника "Типы документов"
+ *Класс сервисного уровня приложения
+ *  для справочника "Типы документов"
  */
 @AllArgsConstructor
 @Service

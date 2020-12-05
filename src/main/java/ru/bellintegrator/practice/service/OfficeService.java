@@ -11,40 +11,44 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- *{@inheritDoc}
+ *Класс сервисного слоя приложения,
+ *  для Office
  */
 @AllArgsConstructor
 @Service
-public class OfficeService implements InstanceService<OfficeDto, OfficeDto> {
+public class OfficeService{
 
     private final OfficeDao officeDao;
     private final DefaultMapper defaultMapperImpl;
 
     /**
-     *{@inheritDoc}
+     * Получение списка офисов
+     * с применением фильтра
+     * @param dto - фильтр для офисов
+     * @return отфильтрованный список DTO офисов
      */
     @Transactional
-    @Override
     public List<OfficeDto> getList(OfficeDto dto) {
 
         return defaultMapperImpl.mapAsList(officeDao.getAll(dto), OfficeDto.class);
     }
 
     /**
-     *{@inheritDoc}
+     * Получение офиса с заданным идентификатором
+     * @param id - идентификатор офиса
+     * @return  DTO офиса с заданным идентификатором
      */
     @Transactional
-    @Override
     public OfficeDto getById(Long id) {
 
         return defaultMapperImpl.map(officeDao.getById(id), OfficeDto.class);
     }
 
     /**
-     *{@inheritDoc}
+     * Изменение данных действующего офиса
+     * @param dto - изменяемые данные
      */
     @Transactional
-    @Override
     public void update(OfficeDto dto) {
 
         Office updatedOffice = defaultMapperImpl.map(dto, Office.class);
@@ -52,10 +56,10 @@ public class OfficeService implements InstanceService<OfficeDto, OfficeDto> {
     }
 
     /**
-     *{@inheritDoc}
+     * Добавление нового офиса
+     * @param dto - данные нового офиса
      */
     @Transactional
-    @Override
     public void save(OfficeDto dto) {
 
         Office office = defaultMapperImpl.map(dto, Office.class);
