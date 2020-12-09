@@ -7,6 +7,8 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import java.util.Objects;
+
 /**
  * Обработчик ответов с использованием классов-обёрток
  */
@@ -41,7 +43,7 @@ public class ResponseAdvice implements ResponseBodyAdvice {
 
         if (body instanceof ErrorResponse) {
             return body;
-        }if (body == null){
+        }if (Objects.requireNonNull(methodParameter.getMethod()).getReturnType().getName().equals("void")){
             return new SuccessResponseBody();
         }
         return new ResponseData(body);
