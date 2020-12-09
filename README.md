@@ -46,7 +46,7 @@
 <li>
 <p>Для получения организации по заданному идентификатору нужно отправить GET запрос c id на адрес: <a>http://localhost:8080/api/organization/{id}</a></p>
 <ul>
-Параметр запроса id
+  <li>Параметр запроса id</li>
 </ul>
 
 <li><p>Для добавления новой организации нужно отправить POST запрос c информацией об организации в виде JSON на адрес: <a>http://localhost:8080/api/organization/save</a><p>
@@ -90,7 +90,7 @@
 <li>
 <p>Для получения офиса по заданному идентификатору нужно отправить GET запрос c id на адрес: <a>http://localhost:8080/api/office/{id}</a></p>
 <ul>
-Параметр запроса id
+  <li>Параметр запроса id</li>
 </ul>
 
 <li><p>Для добавления нового офиса нужно отправить POST запрос c информацией об офисе в виде JSON на адрес: <a>http://localhost:8080/api/office/save</a><p>
@@ -132,7 +132,7 @@
 <li>
 <p>Для получения сотрудника по заданному идентификатору нужно отправить GET запрос c id на адрес: <a>http://localhost:8080/api/user/{id}</a></p>
 <ul>
-Параметр запроса id
+  <li>Параметр запроса id</li>
 </ul>
 
 <li><p>Для добавления нового сотрудника нужно отправить POST запрос c информацией о сотруднике в виде JSON на адрес: <a>http://localhost:8080/api/user/save</a><p>
@@ -186,7 +186,7 @@
 <p>Для получение отфильтрованного списка организаций нужно отправить POST запрос c параметрами фильтра в виде JSON на адрес: <a>http://localhost:8080/api/organization/list</a><p>
 
 ![alt text](screenshots/OrganizationListRequest.png)
-<p>Ответ на наш запрос:</p>
+<p>Ответ на запрос:</p>
 
 ![alt text](screenshots/OrganizationListResponse.png)
 </li>
@@ -194,7 +194,7 @@
 <p>Для получения организации по заданному идентификатору нужно отправить GET запрос c id на адрес: <a>http://localhost:8080/api/organization/{id}</a></p>
 
 ![alt text](screenshots/OrganizationGetrequest.png)
-<p>Ответ на наш запрос:</p>
+<p>Ответ на запрос:</p>
 
 ![alt text](screenshots/OrganizationGetResponse.png)
 </li>
@@ -202,7 +202,7 @@
 <p>Для добавления новой организации нужно отправить POST запрос c информацией об организации в виде JSON на адрес: <a>http://localhost:8080/api/organization/save</a><p>
 
 ![alt text](screenshots/OrganizationSaveExample.png)
-<p>Ответ на наш запрос:</p>
+<p>Ответ на запрос:</p>
 
 ![alt text](screenshots/OrganizationSaveExampleResponse.png)
 </li>
@@ -211,7 +211,7 @@
 <p>Для изменения организации нужно отправить POST запрос c информацией об организации в виде JSON на адрес: <a>http://localhost:8080/api/organization/update</a><p>
 
 ![alt text](screenshots/OrganizationUpdateExample.png)
-<p>Ответ на наш запрос:</p>
+<p>Ответ на запрос:</p>
 
 ![alt text](screenshots/OrganizationSaveExampleResponse.png)
 </li>
