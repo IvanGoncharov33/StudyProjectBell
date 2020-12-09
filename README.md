@@ -193,7 +193,7 @@
 <li>
 <p>Для получения организации по заданному идентификатору нужно отправить GET запрос c id на адрес: <a>http://localhost:8080/api/organization/{id}</a></p>
 
-![alt text](screenshots/OrganizationGetRequest.png)
+![alt text](screenshots/OrganizationGetrequest.png)
 <p>Ответ на наш запрос:</p>
 
 ![alt text](screenshots/OrganizationGetResponse.png)
