@@ -1,7 +1,7 @@
 # StudyProjectBell
 
 <body>
-<h2>Учебный проект Bell Integrator SpringBoot API:</h2>
+<h2>Учебный проект Bell Integrator SpringBoot API</h2>
 <h5>С помощью данного API можно осуществлять:</h5>
 <ul>
 <li>Добавление (организации/офиса/сотрудника)</li>
