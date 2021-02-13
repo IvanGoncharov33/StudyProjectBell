@@ -15,7 +15,7 @@
 <li>Добавить проект в IDEA</li>
 <li>Настроить базу данных
 <ul>
-<li>Скачать базу данных H2 c сайта: <a>http://www.h2database.com/html/download.html</a></li>
+<li>Скачать базу данных H2 c сайта: http://www.h2database.com/html/download.html</li>
 <li>Установить</li>
 <li>Запустить H2 Console</li>
 <li>Сделать конфигурацию по скриншоту:
