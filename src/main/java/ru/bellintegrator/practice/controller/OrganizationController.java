@@ -1,5 +1,7 @@
 package ru.bellintegrator.practice.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/organization")
+@Api(value = "/api/organization", description = "Операции с данными организаций")
 public class OrganizationController {
 
    private final OrganizationService organizationService;
@@ -33,6 +36,7 @@ public class OrganizationController {
      * @return список искомых организаций
      */
     @PostMapping("/list")
+    @ApiOperation(value = "Выводит список организаций с заданным фильтром", httpMethod = "POST")
     public List<OrganizationShortDto>getListOrganization(@Validated(ListView.class)
                                                               @RequestBody OrganizationShortDto organizationShortDto){
 
@@ -45,6 +49,7 @@ public class OrganizationController {
      * @return искомая организация.
      */
     @GetMapping("/{id}")
+    @ApiOperation(value = "Выводит данные организации по заданному идентификатору", httpMethod = "GET")
     public OrganizationFullDto getOrgById(@PathVariable long id) {
 
         return organizationService.getById(id);
@@ -55,6 +60,7 @@ public class OrganizationController {
      * @param organizationFullDto - данные сохраняемой организации
      */
     @PostMapping("/save")
+    @ApiOperation(value = "Добавляет данные новой организации", httpMethod = "POST")
     public void save(@Validated(SaveView.class) @RequestBody OrganizationFullDto organizationFullDto){
 
         organizationService.save(organizationFullDto);
@@ -65,6 +71,7 @@ public class OrganizationController {
      * @param organizationFullDto - данные изменяемой организации
      */
     @PostMapping("/update")
+    @ApiOperation(value = "Изменяет данные организации с указанным идентификатором", httpMethod = "POST")
     public void update(@Validated(UpdateView.class) @RequestBody OrganizationFullDto organizationFullDto){
 
         organizationService.update(organizationFullDto);

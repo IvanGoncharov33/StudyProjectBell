@@ -1,5 +1,7 @@
 package ru.bellintegrator.practice.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/user")
+@Api(value = "/api/user", description = "Операции с данными сотрудников")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -32,6 +35,7 @@ public class EmployeeController {
      * @return отфильтрованный список сотруднков
      */
     @PostMapping("/list")
+    @ApiOperation(value = "Выводит список сотрудников с заданным фильтром", httpMethod = "POST")
     public List<EmployeeDto> getListEmployees(@Validated(ListView.class) @RequestBody EmployeeDto employeeDto){
         return employeeService.getList(employeeDto);
     }
@@ -42,6 +46,7 @@ public class EmployeeController {
      * @return сотрудника с заданным идентификатором
      */
     @GetMapping("/{id}")
+    @ApiOperation(value = "Выводит данные сотрудника по заданному идентификатору", httpMethod = "GET")
     public EmployeeDto getById(@PathVariable long id) {
      return employeeService.getById(id);
     }
@@ -51,6 +56,7 @@ public class EmployeeController {
      * @param employeeDto - данные нового сотрудника
      */
     @PostMapping("/save")
+    @ApiOperation(value = "Добавляет данные нового сотрудника", httpMethod = "POST")
     public void save(@Validated(SaveView.class) @RequestBody EmployeeDto employeeDto){
         employeeService.save(employeeDto);
     }
@@ -60,6 +66,7 @@ public class EmployeeController {
      * @param employeeDto - новые данные изменямого сотрудника
      */
     @PostMapping("/update")
+    @ApiOperation(value = "Изменяет данные сотрудника с указанным идентификатором", httpMethod = "POST")
     public void update(@Validated(UpdateView.class) @RequestBody EmployeeDto employeeDto){
         employeeService.update(employeeDto);
     }

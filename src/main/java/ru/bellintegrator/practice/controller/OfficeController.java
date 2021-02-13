@@ -1,5 +1,7 @@
 package ru.bellintegrator.practice.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/office")
+@Api(value = "/api/office", description = "Операции с данными офисов")
 public class OfficeController {
 
     private final OfficeService officeService;
@@ -33,6 +36,7 @@ public class OfficeController {
      * @return фильтрованный список офисов
      */
     @PostMapping("/list")
+    @ApiOperation(value = "Выводит список офисов с заданным фильтром", httpMethod = "POST")
     public List<OfficeDto> getListOffice(@Validated(ListView.class) @RequestBody OfficeDto officeDto){
 
         return officeService.getList(officeDto);
@@ -44,6 +48,7 @@ public class OfficeController {
      * @return офис с заданым идентификатором
      */
     @GetMapping("/{id}")
+    @ApiOperation(value = "Выводит данные офиса по заданному идентификатору", httpMethod = "GET")
     public OfficeDto getById(@Validated(FullView.class) @PathVariable long id) {
 
        return officeService.getById(id);
@@ -54,6 +59,7 @@ public class OfficeController {
      * @param officeDto - данные офиса для сохранения
      */
     @PostMapping("/save")
+    @ApiOperation(value = "Добавляет данные нового офиса", httpMethod = "POST")
     public void save(@Validated(SaveView.class) @RequestBody OfficeDto officeDto){
 
         officeService.save(officeDto);
@@ -64,6 +70,7 @@ public class OfficeController {
      * @param officeDto - измененные данные офиса
      */
     @PostMapping("/update")
+    @ApiOperation(value = "Изменяет данные офиса с указанным идентификатором", httpMethod = "POST")
     public void update(@Validated(UpdateView.class) @RequestBody OfficeDto officeDto){
 
         officeService.update(officeDto);

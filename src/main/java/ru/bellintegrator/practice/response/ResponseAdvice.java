@@ -4,7 +4,7 @@ import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import java.util.Objects;
@@ -12,7 +12,7 @@ import java.util.Objects;
 /**
  * Обработчик ответов с использованием классов-обёрток
  */
-@ControllerAdvice
+@RestControllerAdvice(basePackages = "ru.bellintegrator.practice")
 public class ResponseAdvice implements ResponseBodyAdvice {
 
     /**
