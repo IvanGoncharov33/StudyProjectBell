@@ -2,6 +2,9 @@
 
 <body>
 <h2>API working with organization information:</h2>
+=======
+<h2>Учебный проект Bell Integrator SpringBoot API</h2>
+>>>>>>> d835c411a4a8b3f5d5819821f7685b13470a1461
 <h5>С помощью данного API можно осуществлять:</h5>
 <ul>
 <li>Добавление (организации/офиса/сотрудника)</li>
