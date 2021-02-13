@@ -1,10 +1,5 @@
-# StudyProjectBell
-
 <body>
-<h2>API working with organization information:</h2>
-=======
-<h2>Учебный проект Bell Integrator SpringBoot API</h2>
->>>>>>> d835c411a4a8b3f5d5819821f7685b13470a1461
+<h2>API working with organization information</h2>
 <h5>С помощью данного API можно осуществлять:</h5>
 <ul>
 <li>Добавление (организации/офиса/сотрудника)</li>
@@ -30,7 +25,7 @@
 <li>Нажать соединиться</li>
 </ul>
 <li>Запустить программу с помощью ru.bellintegrator.practice.PracticeApplication.java</li>
-<li>Адрес для взаимодействия с API по умолчанию: <a>http://localhost:8080</a></li>
-<li>Добавлен Swagger UI, адрес для взаимодействия: <a>http://localhost:8080/swagger-ui.html</a></li>
+<li>Адрес для взаимодействия с API по умолчанию: http://localhost:8080</li>
+<li>Добавлен Swagger UI, адрес для взаимодействия: http://localhost:8080/swagger-ui.html</li>
 </ol>
 </body>
